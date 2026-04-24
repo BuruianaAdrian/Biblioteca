@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="464.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.addBooksController">
+   <children>
+      <GridPane maxHeight="-Infinity" maxWidth="687.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="687.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="346.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="341.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="346.0">
+               <children>
+                  <Label text="ISBN:" />
+                  <TextField fx:id="ISBN" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci ISBN" />
+                  <Label text="Titolo:" />
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci titolo" />
+                  <Label text="Autore:" />
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci autore" />
+                  <Label text="Editore:" />
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci editore" />
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+               <children>
+                  <Label text="Scegli Scaffale e Piano:">
+                     <VBox.margin>
+                        <Insets top="90.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ComboBox fx:id="boxScaffale" prefWidth="150.0" promptText="Scaffale">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin></ComboBox>
+                  <ComboBox fx:id="boxPiano" prefWidth="150.0" promptText="Piano">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Conferma" textAlignment="JUSTIFY" />
+   </children>
+</VBox>
