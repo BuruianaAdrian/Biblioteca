@@ -3,53 +3,66 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" prefHeight="464.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.addBooksController">
+<VBox alignment="CENTER" prefHeight="452.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.addBooksController">
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="687.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="687.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="588.0" minWidth="10.0" prefWidth="346.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="341.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <AnchorPane prefHeight="450.0" prefWidth="694.0">
          <children>
-            <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="216.0" prefWidth="346.0">
+            <Label layoutX="278.0" layoutY="24.0" text="Aggiungi libro">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" layoutY="72.0" prefHeight="236.0" prefWidth="693.0">
                <children>
-                  <Label text="ISBN:" />
-                  <TextField fx:id="ISBN" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci ISBN" />
-                  <Label text="Titolo:" />
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci titolo" />
-                  <Label text="Autore:" />
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci autore" />
-                  <Label text="Editore:" />
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci editore" />
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="346.0">
+                     <children>
+                        <Label text="ISBN:">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="ISBNi" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci ISBN" />
+                        <Label text="Titolo:">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="titoloI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci titolo" />
+                        <ComboBox fx:id="boxPianoI" prefWidth="150.0" promptText="Piano">
+                           <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="346.0">
+                     <children>
+                        <Label text="Autore:" />
+                        <TextField fx:id="autoreI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci autore" />
+                        <Label text="Editore:">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="editoreI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci editore" />
+                        <ComboBox fx:id="boxScaffaleI" prefWidth="150.0" promptText="Scaffale">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                             <VBox.margin>
+                              <Insets top="30.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-               <children>
-                  <Label text="Scegli Scaffale e Piano:">
-                     <VBox.margin>
-                        <Insets top="90.0" />
-                     </VBox.margin>
-                  </Label>
-                  <ComboBox fx:id="boxScaffale" prefWidth="150.0" promptText="Scaffale">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin></ComboBox>
-                  <ComboBox fx:id="boxPiano" prefWidth="150.0" promptText="Piano">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </ComboBox>
-               </children>
-            </VBox>
+            </HBox>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="321.0" mnemonicParsing="false" onAction="#conferma" text="Conferma" textAlignment="JUSTIFY" />
+            <Button layoutX="628.0" layoutY="14.0" mnemonicParsing="false" onAction="#tornaMenu" text="Menu" />
+            <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="359.0" prefHeight="18.0" prefWidth="694.0" text="Label" textAlignment="CENTER" textFill="RED" visible="false" />
          </children>
-      </GridPane>
-      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Conferma" textAlignment="JUSTIFY" />
+      </AnchorPane>
    </children>
 </VBox>

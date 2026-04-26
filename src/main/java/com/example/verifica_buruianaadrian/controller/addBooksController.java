@@ -4,139 +4,115 @@ import com.example.verifica_buruianaadrian.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class addBooksController {
+    @FXML
+    public TextField ISBNi;
+    @FXML
+    public ComboBox<Scaffale> boxScaffaleI;
+    @FXML
+    public ComboBox<Integer> boxPianoI;
+    @FXML
+    public TextField titoloI;
+    @FXML
+    public TextField autoreI;
+    @FXML
+    public TextField editoreI;
+    @FXML
+    public Label messageLabel;
+
+    Biblioteca biblioteca = DataStore.biblioteca;
+
+    public void initialize(){
+        boxPianoI.getItems().clear();
+        boxScaffaleI.getItems().clear();
+
+        boxScaffaleI.getItems().addAll(biblioteca.getListascaffale());
+
+        for(Scaffale a: biblioteca.getListascaffale()){
+            boxPianoI.getItems().add(a.getPiano());
+        }
+    }
 
     @FXML
-    private void cambiaScena(ActionEvent event) throws IOException {
-        // 1. Carica il nuovo file FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/verifica_buruianaadrian/menu.fxml"));
-        Parent root = loader.load();
+    public void tornaMenu(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/verifica_buruianaadrian/menu.fxml"));
 
-        // 2. Ottieni lo Stage (la finestra) attuale.
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        // 3. Crea la nuova scena con il file caricato
-        Scene scene = new Scene(root);
-
-        // 4. Imposta la scena sullo stage e mostrala
-        stage.setScene(scene);
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
-    @FXML
-    public TextField ISBN;
-    @FXML
-    public ComboBox<Scaffale> boxScaffale;
-    @FXML
-    public ComboBox<Integer> boxPiano;
-    @FXML
-    public TextArea textArea;
-    @FXML
-    public Button bISBN;
-    @FXML
-    public Button titolo;
-    @FXML
-    public Button posizione;
-    public int lol;
+    public void conferma(){
+        String ISBN = ISBNi.getText();
+        String titolo = titoloI.getText();
+        String autore = autoreI.getText();
+        String editore = editoreI.getText();
 
-    ArrayList<Scaffale> listScaffali;
-    ArrayList<Libro> listLibri;
-    Biblioteca biblioteca = new Biblioteca();
+        Integer piano = boxPianoI.getValue();
+        Scaffale scaffale = boxScaffaleI.getValue();
+        if(ISBN.isEmpty() || titolo.isEmpty() || autore.isEmpty() || editore.isEmpty() || piano == null || scaffale == null){
+            messageLabel.setVisible(true);
+            messageLabel.setStyle("-fx-text-fill: red;");
+            messageLabel.setText("Compila tutti i campi");
+            return;
+        }
+        if(biblioteca.controlloCodice(ISBN)){
+            messageLabel.setVisible(true);
+            messageLabel.setStyle("-fx-text-fill: red;");
+            messageLabel.setText("ISBN già esistente");
+            return;
+        }
+        Libro libro = new Libro(ISBN,titolo,autore,editore);
+        libro.setNumeroPiano(piano);
+        libro.setScaffale(scaffale);
 
-    public void initialize(){
-        listScaffali = new ArrayList<>();
-        listLibri = new ArrayList<>();
+        biblioteca.getListalibri().add(libro);
 
-        Scaffale scaffale1 = new Scaffale("1AE4R", 1);
-        listScaffali.add(scaffale1);
-        Scaffale scaffale2 = new Scaffale("67UO2", 2);
-        listScaffali.add(scaffale2);
-        Scaffale scaffale3 = new Scaffale("T3ET5", 3);
-        listScaffali.add(scaffale3);
+        messageLabel.setVisible(true);
+        messageLabel.setStyle("-fx-text-fill: green;");
+        messageLabel.setText("Libro aggiunto con successo");
 
-
-        Libro libro1 = new Libro("12345", "Tommy's advanture", "Tommy", "tlou");
-        listLibri.add(libro1);
-        Libro libro2 = new Libro("123456", "The suffering of Joel", "Joel", "tlou");
-        listLibri.add(libro2);
-        Libro libro3 = new Libro("1234567", "Ellie's suffering", "Ellie", "tlou");
-        listLibri.add(libro3);
-
-        biblioteca.setListalibri(listLibri);
-        biblioteca.setListascaffale(listScaffali);
-
-        boxScaffale.getItems().addAll(listScaffali);
-
-        for(Scaffale a: listScaffali){
-            boxPiano.getItems().add(a.getPiano());
+        for( Libro a : biblioteca.getListalibri()){
+            System.out.println(a.getCodiceISBN());
         }
     }
-
-
-    public void mostraTextArea(String risultato){
-        textArea.clear();
-        textArea.setText(risultato);
-    }
-
-    public void assegna(){
-        String ISBN1 = ISBN.getText();
-        Libro libro = biblioteca.controlloCodice(ISBN1);
-        if(libro == null) {
-            textArea.setText("Codice sbagliato");
-        }else if(libro.isPosizionato(libro)){
-            textArea.setText("Libro gia posizionato");
-        }else{
-            Integer piano = boxPiano.getValue();
-            Scaffale scaffale = boxScaffale.getValue();
-            if(piano == null || scaffale == null){
-                mostraTextArea("Errore:Inserisci scaffale e piano");
-            }else{
-                libro.setNumeroPiano(piano);
-                libro.setScaffale(scaffale);
-
-                mostraTextArea(libro.toString());
-            }
-        }
-    }
-    public void ordinamentoPerTitolo(){
-        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
-        Collections.sort(ordinamento, new ComparatorTitolo());
-        textArea.clear();
-        for(Libro l : ordinamento){
-            textArea.appendText(l.toString() + "\n");
-        }
-    }
-
-    public void ordinamentoPerISBN(){
-        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
-        Collections.sort(ordinamento, new ComparatorISBN());
-        textArea.clear();
-        for(Libro l : ordinamento){
-            textArea.appendText(l.toString() + "\n");
-        }
-    }
-
-    public void ordinamentoPosizione(){
-        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
-        Collections.sort(ordinamento, new ComparatorPosizione());
-        textArea.clear();
-        for(Libro l : ordinamento){
-            textArea.appendText(l.toString() + "\n");
-        }
-    }
+//    public void ordinamentoPerTitolo(){
+//        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
+//        Collections.sort(ordinamento, new ComparatorTitolo());
+//        textArea.clear();
+//        for(Libro l : ordinamento){
+//            textArea.appendText(l.toString() + "\n");
+//        }
+//    }
+//
+//    public void ordinamentoPerISBN(){
+//        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
+//        Collections.sort(ordinamento, new ComparatorISBN());
+//        textArea.clear();
+//        for(Libro l : ordinamento){
+//            textArea.appendText(l.toString() + "\n");
+//        }
+//    }
+//
+//    public void ordinamentoPosizione(){
+//        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
+//        Collections.sort(ordinamento, new ComparatorPosizione());
+//        textArea.clear();
+//        for(Libro l : ordinamento){
+//            textArea.appendText(l.toString() + "\n");
+//        }
+//    }
 
 
 }
