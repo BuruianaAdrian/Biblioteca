@@ -29,11 +29,8 @@ public class Libro implements Comparable<Libro>{
                 ", NumeroPiano: " + numeroPiano + "\n" +
                 "---------------------------\n";
     }
-    public Boolean isPosizionato(Libro a){
-        if(a.getNumeroPiano() != 0){
-            return true;
-        }
-        return false;
+    public Boolean isPosizionato(){
+        return this.scaffale != null && this.numeroPiano != 0;
     }
     public String getCodiceISBN() {
         return codiceISBN;

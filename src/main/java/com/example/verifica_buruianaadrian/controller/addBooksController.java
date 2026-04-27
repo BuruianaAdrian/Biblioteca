@@ -87,32 +87,4 @@ public class addBooksController {
             System.out.println(a.getCodiceISBN());
         }
     }
-//    public void ordinamentoPerTitolo(){
-//        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
-//        Collections.sort(ordinamento, new ComparatorTitolo());
-//        textArea.clear();
-//        for(Libro l : ordinamento){
-//            textArea.appendText(l.toString() + "\n");
-//        }
-//    }
-//
-//    public void ordinamentoPerISBN(){
-//        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
-//        Collections.sort(ordinamento, new ComparatorISBN());
-//        textArea.clear();
-//        for(Libro l : ordinamento){
-//            textArea.appendText(l.toString() + "\n");
-//        }
-//    }
-//
-//    public void ordinamentoPosizione(){
-//        ArrayList<Libro> ordinamento = new ArrayList<>(listLibri);
-//        Collections.sort(ordinamento, new ComparatorPosizione());
-//        textArea.clear();
-//        for(Libro l : ordinamento){
-//            textArea.appendText(l.toString() + "\n");
-//        }
-//    }
-
-
 }

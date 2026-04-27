@@ -5,20 +5,13 @@ import java.util.Objects;
 
 public class ComparatorPosizione implements Comparator<Libro> {
     @Override
+    // 1. Confronta i codici degli Scaffali se sono diversi restituisce l'ordine alfabetico dei codici
+    // 2. Se lo scaffale è lo stesso, confronta i piani
     public int compare(Libro a , Libro b){
-        if(a.isPosizionato(a) == true && b.isPosizionato(b) == true){
-            if(a.getScaffale()!=b.getScaffale()){
-                return CharSequence.compare(a.getScaffale().getCodice(), b.getScaffale().getCodice());
-            }else{
-                return Integer.compare(a.getScaffale().getPiano(), b.getScaffale().getPiano());
-            }
-        }else if(a.isPosizionato(a) == false && b.isPosizionato(b) == false){
-            if(!Objects.equals(a.getCodiceISBN(), b.getCodiceISBN())){
-                return CharSequence.compare(a.getCodiceISBN(), b.getCodiceISBN());
-            }
-        }else{
-            return Integer.compare(a.getNumeroPiano(), b.getNumeroPiano());
+        if (!a.getScaffale().getCodice().equals(b.getScaffale().getCodice())) {
+            return a.getScaffale().getCodice().compareTo(b.getScaffale().getCodice());
         }
-        return 0;
+
+        return Integer.compare(a.getScaffale().getPiano(), b.getScaffale().getPiano());
     }
 }
