@@ -61,10 +61,10 @@ public class addBooksController {
 
         Integer piano = boxPianoI.getValue();
         Scaffale scaffale = boxScaffaleI.getValue();
-        if(ISBN.isEmpty() || titolo.isEmpty() || autore.isEmpty() || editore.isEmpty() || piano == null || scaffale == null){
+        if(ISBN.isEmpty() || titolo.isEmpty() || autore.isEmpty() || editore.isEmpty() || (piano != null && scaffale == null) || (piano == null && scaffale != null)){
             messageLabel.setVisible(true);
             messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("Compila tutti i campi");
+            messageLabel.setText("Compila tutti i campi, se vuoi posizionare un libro scegli piano e scaffale.");
             return;
         }
         if(biblioteca.controlloCodice(ISBN)){
@@ -73,18 +73,26 @@ public class addBooksController {
             messageLabel.setText("ISBN già esistente");
             return;
         }
-        Libro libro = new Libro(ISBN,titolo,autore,editore);
-        libro.setNumeroPiano(piano);
-        libro.setScaffale(scaffale);
-
-        biblioteca.getListalibri().add(libro);
-
-        messageLabel.setVisible(true);
-        messageLabel.setStyle("-fx-text-fill: green;");
-        messageLabel.setText("Libro aggiunto con successo");
+        Libro libro;
+        if( piano == null && scaffale == null){
+            libro = new Libro(ISBN,titolo,autore,editore);
+            biblioteca.getListalibri().add(libro);
+            successo();
+        }else{
+            libro = new Libro(ISBN,titolo,autore,editore);
+            libro.setNumeroPiano(piano);
+            libro.setScaffale(scaffale);
+            biblioteca.getListalibri().add(libro);
+            successo();
+        }
 
         for( Libro a : biblioteca.getListalibri()){
             System.out.println(a.getCodiceISBN());
         }
+    }
+    public void successo(){
+        messageLabel.setVisible(true);
+        messageLabel.setStyle("-fx-text-fill: green;");
+        messageLabel.setText("Libro aggiunto con successo");
     }
 }
