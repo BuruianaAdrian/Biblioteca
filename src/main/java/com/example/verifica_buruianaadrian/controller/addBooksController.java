@@ -38,6 +38,7 @@ public class addBooksController {
 
         boxScaffaleI.getItems().addAll(biblioteca.getListascaffale());
 
+
         for(Scaffale a: biblioteca.getListascaffale()){
             boxPianoI.getItems().add(a.getPiano());
         }
@@ -61,6 +62,8 @@ public class addBooksController {
 
         Integer piano = boxPianoI.getValue();
         Scaffale scaffale = boxScaffaleI.getValue();
+        //boolean posizioneVuota
+        //boolean posizioneCompleta
         if(ISBN.isEmpty() || titolo.isEmpty() || autore.isEmpty() || editore.isEmpty() || (piano != null && scaffale == null) || (piano == null && scaffale != null)){
             messageLabel.setVisible(true);
             messageLabel.setStyle("-fx-text-fill: red;");

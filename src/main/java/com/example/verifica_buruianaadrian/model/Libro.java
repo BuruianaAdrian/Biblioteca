@@ -7,6 +7,7 @@ public class Libro implements Comparable<Libro>{
     private String editore;
     private Scaffale scaffale;
     private int numeroPiano;
+    private Categoria categoria;
 
     public Libro(String codiceISBN, String titolo, String autore, String editore) {
         this.codiceISBN = codiceISBN;
@@ -25,8 +26,9 @@ public class Libro implements Comparable<Libro>{
                 ", Titolo: " + titolo +"\n"+
                 "Autore: " + autore +
                 ", Editore: " + editore + "\n"+
-                "Scaffale: " + scaffale +
-                ", NumeroPiano: " + numeroPiano + "\n" +
+                "NumeroPiano: " + (numeroPiano == 0 ? "non posizionato" : numeroPiano) +
+                ", Scaffale: " +(scaffale == null ? "non posizionato" : scaffale) + "\n" +
+                "Categoria: " + (categoria == null ? "non posizionato" : categoria ) + "\n" +
                 "---------------------------\n";
     }
     public Boolean isPosizionato(){
