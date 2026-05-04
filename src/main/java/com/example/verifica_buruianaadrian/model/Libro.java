@@ -5,6 +5,7 @@ public class Libro implements Comparable<Libro>{
     private String titolo;
     private String autore;
     private String editore;
+    private Categoria categoria;
     private Scaffale scaffale;
     private int numeroPiano;
 
@@ -32,40 +33,13 @@ public class Libro implements Comparable<Libro>{
     public Boolean isPosizionato(){
         return this.scaffale != null && this.numeroPiano != 0;
     }
+
     public String getCodiceISBN() {
         return codiceISBN;
     }
 
     public String getTitolo() {
         return titolo;
-    }
-
-    public String getAutore() {
-        return autore;
-    }
-
-    public String getEditore() {
-        return editore;
-    }
-
-    public int getNumeroPiano() {
-        return numeroPiano;
-    }
-
-    public void setCodiceISBN(String codiceISBN) {
-        this.codiceISBN = codiceISBN;
-    }
-
-    public void setTitolo(String titolo) {
-        this.titolo = titolo;
-    }
-
-    public void setAutore(String autore) {
-        this.autore = autore;
-    }
-
-    public void setEditore(String editore) {
-        this.editore = editore;
     }
 
     public void setScaffale(Scaffale scaffale) {
@@ -78,5 +52,13 @@ public class Libro implements Comparable<Libro>{
 
     public Scaffale getScaffale() {
         return scaffale;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
     }
 }

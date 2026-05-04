@@ -1,39 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.menuController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.menuController">
    <children>
-      <Label text="Menu">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Label>
-      <Button mnemonicParsing="false" onAction="#scenaAddBooks" text="Aggiungi libro">
-         <VBox.margin>
-            <Insets top="60.0" />
-         </VBox.margin>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#scenaModifca" text="Modifica posizione o scaffale">
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Button>
-      <Button mnemonicParsing="false" onAction="#scenaRicerca" text="Ricerca">
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Button>
-      <Button mnemonicParsing="false" text="Lista">
-         <VBox.margin>
-            <Insets top="20.0" />
-         </VBox.margin>
-      </Button>
+      <AnchorPane prefHeight="451.0" prefWidth="694.0">
+         <children>
+            <Label layoutX="327.0" layoutY="74.0" text="Menu">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="308.0" layoutY="153.0" mnemonicParsing="false" onAction="#scenaAddBooks" text="Aggiungi libro" />
+            <Button layoutX="264.0" layoutY="212.0" mnemonicParsing="false" onAction="#scenaModifca" text="Modifica posizione o categoria" />
+            <Button layoutX="327.0" layoutY="268.0" mnemonicParsing="false" onAction="#scenaRicerca" text="Ricerca" />
+         </children>
+      </AnchorPane>
    </children>
 </VBox>

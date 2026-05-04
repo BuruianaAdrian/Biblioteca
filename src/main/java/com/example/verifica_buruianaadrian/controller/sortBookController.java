@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class findBookController {
+public class sortBookController {
     @FXML
     public TextArea textArea;
     @FXML
@@ -37,9 +37,7 @@ public class findBookController {
     }
     public void tornaMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/verifica_buruianaadrian/menu.fxml"));
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         stage.setScene(new Scene(root));
         stage.show();
     }

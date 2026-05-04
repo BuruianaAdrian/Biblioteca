@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="452.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.findBookController">
+<VBox alignment="CENTER" prefHeight="452.0" prefWidth="690.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.sortBookController">
    <children>
       <AnchorPane prefHeight="554.0" prefWidth="690.0">
          <children>

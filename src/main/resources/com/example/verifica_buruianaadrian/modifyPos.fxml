@@ -7,9 +7,9 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.verifica_buruianaadrian.controller.modifyPosController">
    <children>
-      <AnchorPane prefHeight="458.0" prefWidth="690.0">
+      <AnchorPane prefHeight="450.0" prefWidth="694.0">
          <children>
-            <Label layoutX="236.0" layoutY="48.0" text="Modifica posizione e scaffale">
+            <Label layoutX="236.0" layoutY="48.0" text="Modifica posizione o categoria">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -26,6 +26,11 @@
                      <children>
                         <ComboBox fx:id="inputPiano" prefWidth="150.0" promptText="Piano" />
                         <ComboBox fx:id="inputScaffale" prefWidth="150.0" promptText="Scaffale">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                        <ComboBox fx:id="inputCategoria" layoutX="88.0" layoutY="56.0" prefWidth="150.0" promptText="Categoria">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>

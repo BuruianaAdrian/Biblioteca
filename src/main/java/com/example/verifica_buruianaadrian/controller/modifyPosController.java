@@ -1,9 +1,6 @@
 package com.example.verifica_buruianaadrian.controller;
 
-import com.example.verifica_buruianaadrian.model.Biblioteca;
-import com.example.verifica_buruianaadrian.model.DataStore;
-import com.example.verifica_buruianaadrian.model.Libro;
-import com.example.verifica_buruianaadrian.model.Scaffale;
+import com.example.verifica_buruianaadrian.model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,11 +23,14 @@ public class modifyPosController {
     public ComboBox <Integer> inputPiano;
     @FXML
     public TextField inputISBN;
+    @FXML
+    public ComboBox<Categoria> inputCategoria;
 
     Biblioteca biblioteca = DataStore.biblioteca;
 
     public void initialize(){
         inputScaffale.getItems().addAll(biblioteca.getListascaffale());
+        inputCategoria.getItems().addAll(Categoria.values());
 
         for(Scaffale a: biblioteca.getListascaffale()){
             inputPiano.getItems().add(a.getPiano());
@@ -46,31 +46,64 @@ public class modifyPosController {
         stage.show();
     }
 
-    public void aggiornaLibro(String ISBN, Integer piano, Scaffale scaffale){
+    public void aggiornaLibro(String ISBN, Integer piano, Scaffale scaffale, Categoria categoria){
         Libro libro = null;
         for(Libro a: biblioteca.getListalibri()){
             if(a.getCodiceISBN().equals(ISBN)){
                 libro = a;
             }
         }
-        libro.setScaffale(scaffale);
-        libro.setNumeroPiano(piano);
+
+        if(libro == null) return;
+
+        if(piano != null && scaffale != null){
+            libro.setNumeroPiano(piano);
+            libro.setScaffale(scaffale);
+        }
+        if(categoria != null){
+            libro.setCategoria(categoria);
+        }
+
     }
+
 
     public void conferma(){
         String ISBN = inputISBN.getText();
         Integer piano = inputPiano.getValue();
         Scaffale scaffale = inputScaffale.getValue();
+        Categoria categoria = inputCategoria.getValue();
+
+        boolean conCategoria = piano != null && scaffale != null && categoria != null;
+        boolean senzaCategoria = piano != null && scaffale != null && categoria == null;
+        boolean soloCategoria = piano == null && scaffale == null && categoria != null;
 
         if(biblioteca.controlloCodice(ISBN)){
-            aggiornaLibro(ISBN, piano, scaffale);
-            messageLabel.setVisible(true);
-            messageLabel.setStyle("-fx-text-fill: green;");
-            messageLabel.setText("Libro modificato con successo.");
+            if(senzaCategoria){
+                aggiornaLibro(ISBN, piano,scaffale,null);
+                showSuccess("Piano e scaffale modificato con successo");
+            } else if (conCategoria) {
+                aggiornaLibro(ISBN, piano, scaffale, categoria);
+                showSuccess("Piano, scaffale e categoria modificato con successo");
+            }
+            if(soloCategoria){
+                aggiornaLibro(ISBN, null, null, categoria);
+                showSuccess("Categoria modificato con successo");
+            }
+
         }else{
-            messageLabel.setVisible(true);
-            messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("Libro non registrato.");
+            showError("Libro non registrato.");
         }
     }
+
+    public void showSuccess(String s){
+        messageLabel.setVisible(true);
+        messageLabel.setStyle("-fx-text-fill: green;");
+        messageLabel.setText(s);
+    }
+    public void showError(String s){
+        messageLabel.setVisible(true);
+        messageLabel.setStyle("-fx-text-fill: red;");
+        messageLabel.setText(s);
+    }
+
 }

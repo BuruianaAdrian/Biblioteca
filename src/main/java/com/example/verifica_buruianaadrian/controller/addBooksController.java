@@ -29,17 +29,34 @@ public class addBooksController {
     public TextField editoreI;
     @FXML
     public Label messageLabel;
+    @FXML
+    public ComboBox<Categoria> boxCategoria;
 
     Biblioteca biblioteca = DataStore.biblioteca;
 
     public void initialize(){
+        ArrayList<Libro> listLibri = new ArrayList<>();
+        ArrayList<Scaffale> listScaffale = new ArrayList<>();
+
+        listScaffale.add(new Scaffale("1AE4R", 8));
+        listScaffale.add(new Scaffale("67UO2", 9));
+        listScaffale.add(new Scaffale("T3ET5", 5));
+
+        biblioteca.setListascaffale(listScaffale);
+        biblioteca.setListalibri(listLibri);
+
+        boxScaffaleI.getItems().addAll(listScaffale);
+        boxCategoria.getItems().addAll(Categoria.values());
+
+        boxScaffaleI.getSelectionModel().selectFirst();
+        loadPiani();
+    }
+    @FXML
+    public void loadPiani(){
         boxPianoI.getItems().clear();
-        boxScaffaleI.getItems().clear();
-
-        boxScaffaleI.getItems().addAll(biblioteca.getListascaffale());
-
-        for(Scaffale a: biblioteca.getListascaffale()){
-            boxPianoI.getItems().add(a.getPiano());
+        Scaffale s = boxScaffaleI.getValue();
+        for(int i = 1; i <= s.getPiano(); i++){
+            boxPianoI.getItems().add(i);
         }
     }
 
@@ -58,41 +75,49 @@ public class addBooksController {
         String titolo = titoloI.getText();
         String autore = autoreI.getText();
         String editore = editoreI.getText();
+        Categoria categoria = boxCategoria.getValue();
 
         Integer piano = boxPianoI.getValue();
         Scaffale scaffale = boxScaffaleI.getValue();
-        if(ISBN.isEmpty() || titolo.isEmpty() || autore.isEmpty() || editore.isEmpty() || (piano != null && scaffale == null) || (piano == null && scaffale != null)){
-            messageLabel.setVisible(true);
-            messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("Compila tutti i campi, se vuoi posizionare un libro scegli piano e scaffale.");
+
+        boolean posizioneVuota = piano == null && scaffale == null && categoria == null;
+        boolean posizioneCompleta = piano != null && scaffale != null && categoria != null;
+
+        if(ISBN.isEmpty() || titolo.isEmpty() || autore.isEmpty() || editore.isEmpty() || (!posizioneVuota && !posizioneCompleta)){
+            showError("Compila tutti i campi, se vuoi posizionare un libro scegli piano, scaffale e categoria.");
             return;
         }
         if(biblioteca.controlloCodice(ISBN)){
-            messageLabel.setVisible(true);
-            messageLabel.setStyle("-fx-text-fill: red;");
-            messageLabel.setText("ISBN già esistente");
+            showError("ISBN già esistente");
             return;
         }
+
         Libro libro;
-        if( piano == null && scaffale == null){
+        if(posizioneVuota){
             libro = new Libro(ISBN,titolo,autore,editore);
             biblioteca.getListalibri().add(libro);
-            successo();
+            showSuccess("Libro aggiunto con successo");
         }else{
             libro = new Libro(ISBN,titolo,autore,editore);
             libro.setNumeroPiano(piano);
             libro.setScaffale(scaffale);
+            libro.setCategoria(categoria);
             biblioteca.getListalibri().add(libro);
-            successo();
+            showSuccess("Libro aggiunto con successo");
         }
 
-        for( Libro a : biblioteca.getListalibri()){
+        for(Libro a : biblioteca.getListalibri()){
             System.out.println(a.getCodiceISBN());
         }
     }
-    public void successo(){
+    public void showSuccess(String s){
         messageLabel.setVisible(true);
         messageLabel.setStyle("-fx-text-fill: green;");
-        messageLabel.setText("Libro aggiunto con successo");
+        messageLabel.setText(s);
+    }
+    public void showError(String s){
+        messageLabel.setVisible(true);
+        messageLabel.setStyle("-fx-text-fill: red;");
+        messageLabel.setText(s);
     }
 }

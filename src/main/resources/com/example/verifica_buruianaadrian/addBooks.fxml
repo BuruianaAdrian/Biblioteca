@@ -14,9 +14,9 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" layoutY="72.0" prefHeight="236.0" prefWidth="693.0">
+            <HBox alignment="CENTER" layoutY="72.0" prefHeight="277.0" prefWidth="694.0">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="346.0">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="236.0" prefWidth="346.0">
                      <children>
                         <Label text="ISBN:">
                            <VBox.margin>
@@ -26,32 +26,43 @@
                         <TextField fx:id="ISBNi" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci ISBN" />
                         <Label text="Titolo:">
                            <VBox.margin>
-                              <Insets top="20.0" />
+                              <Insets top="10.0" />
                            </VBox.margin>
                         </Label>
                         <TextField fx:id="titoloI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci titolo" />
+                        <Label text="Autore:">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin></Label>
+                        <TextField fx:id="autoreI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci autore" />
+                        <Label text="Editore:">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="editoreI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci editore" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="246.0" prefWidth="346.0">
+                     <children>
+                        <ComboBox fx:id="boxScaffaleI" onAction="#loadPiani" prefWidth="150.0" promptText="Scaffale">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                             <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </ComboBox>
                         <ComboBox fx:id="boxPianoI" prefWidth="150.0" promptText="Piano">
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>
                         </ComboBox>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="220.0" prefWidth="346.0">
-                     <children>
-                        <Label text="Autore:" />
-                        <TextField fx:id="autoreI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci autore" />
-                        <Label text="Editore:">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="editoreI" maxHeight="-Infinity" maxWidth="-Infinity" promptText="Inserisci editore" />
-                        <ComboBox fx:id="boxScaffaleI" prefWidth="150.0" promptText="Scaffale">
+                        <ComboBox fx:id="boxCategoria" layoutX="108.0" layoutY="176.0" prefWidth="150.0" promptText="Categoria">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
-                             <VBox.margin>
+                           <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>
                         </ComboBox>
@@ -59,9 +70,9 @@
                   </VBox>
                </children>
             </HBox>
-            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="321.0" mnemonicParsing="false" onAction="#conferma" text="Conferma" textAlignment="JUSTIFY" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="312.0" layoutY="350.0" mnemonicParsing="false" onAction="#conferma" text="Conferma" textAlignment="JUSTIFY" />
             <Button layoutX="628.0" layoutY="14.0" mnemonicParsing="false" onAction="#tornaMenu" text="Menu" />
-            <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="359.0" prefHeight="18.0" prefWidth="694.0" text="Label" textAlignment="CENTER" textFill="RED" visible="false" />
+            <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="398.0" prefHeight="18.0" prefWidth="694.0" text="Label" textAlignment="CENTER" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
    </children>
