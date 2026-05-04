@@ -8,7 +8,7 @@ public class Libro implements Comparable<Libro>{
     private Categoria categoria;
     private Scaffale scaffale;
     private int numeroPiano;
-    private Categoria categoria;
+
 
     public Libro(String codiceISBN, String titolo, String autore, String editore) {
         this.codiceISBN = codiceISBN;
@@ -60,7 +60,4 @@ public class Libro implements Comparable<Libro>{
         this.categoria = categoria;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
 }
